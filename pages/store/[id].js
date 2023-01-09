@@ -1,9 +1,12 @@
-import { Container, Box, Grid } from "@mui/material";
+import { Container, Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import Image from "next/image";
 const StoreItem = ({ data }) => {
   return (
-   
+    <>
+      <Typography variant="h1" gutterBottom component="div">
+        Details{" "}
+      </Typography>
       <Grid container spacing={2} margin="0 auto" sx={{ m: 6 }}>
         <Grid
           item
@@ -13,11 +16,14 @@ const StoreItem = ({ data }) => {
           justifyContent="space-between"
           boxShadow="1px 1px 1px blue"
         >
-          <h4>{data.title}</h4>
-          <Image src={data.image} width={111} height={111} alt={data.title} />
-          <p>{data.price}</p>
+          <div>
+            <h4>{data.title}</h4>
+            <Image src={data.image} width={111} height={111} alt={data.title} />
+            <p>${data.price.toFixed(2)}</p>
+          </div>
         </Grid>
       </Grid>
+    </>
   );
 };
 
