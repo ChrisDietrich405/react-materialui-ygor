@@ -20,6 +20,7 @@ const StoreItem = ({ data }) => {
             <h4>{data.title}</h4>
             <Image src={data.image} width={111} height={111} alt={data.title} />
             <p>${data.price.toFixed(2)}</p>
+            <p>{data.description}</p>
           </div>
         </Grid>
       </Grid>
