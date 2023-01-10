@@ -22,7 +22,7 @@ const Store = ({ data }) => {
   //   router.push(`/store/${item.id}`);
   // };
 
-  function addToCart(item) {
+  function goToDetails(item) {
     const CartItems = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
@@ -61,10 +61,10 @@ const Store = ({ data }) => {
                     alt={item.title}
                   />
                   <p style={{ marginLeft: "30px" }}>${item.price.toFixed(2)}</p>
-                  <Button onClick={() => addToCart(item)} variant="contained">
-                    Add to Cart
+                  <Button onClick={() => goToDetails(item)} variant="contained">
+                    Go to Details
                   </Button>
-                  <Button onClick={() => router.push(`/${item.id}`)}>Go to details</Button>
+                  <Button onClick={() => router.push(`/cart/${item.id}`)} variant="contained">Add to Cart</Button>
                 </a>
               </Grid>
             </Link>

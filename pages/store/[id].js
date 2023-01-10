@@ -1,7 +1,10 @@
-import { Container, Box, Grid, Typography } from "@mui/material";
+import { Container, Box, Grid, Typography, Button } from "@mui/material";
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 const StoreItem = ({ data }) => {
+  const router = useRouter();
+
   return (
     <>
       <Typography variant="h1" gutterBottom component="div">
@@ -21,6 +24,12 @@ const StoreItem = ({ data }) => {
             <Image src={data.image} width={111} height={111} alt={data.title} />
             <p>${data.price.toFixed(2)}</p>
             <p>{data.description}</p>
+            <Button
+              onClick={() => router.push(`/cart/${data.id}`)}
+              variant="contained"
+            > 
+              Add to Cart
+            </Button>
           </div>
         </Grid>
       </Grid>
