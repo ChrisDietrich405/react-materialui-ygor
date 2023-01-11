@@ -5,6 +5,15 @@ import { useRouter } from "next/router";
 const StoreItem = ({ data }) => {
   const router = useRouter();
 
+  const goToCart = (item) => {
+    const CartItems = localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
+    const newCart = [...CartItems, item];
+    localStorage.setItem("cart", JSON.stringify(newCart));
+    router.push(`/cart/${data.id}`)
+  }
+
   return (
     <>
       <Typography variant="h1" gutterBottom component="div">
@@ -25,7 +34,7 @@ const StoreItem = ({ data }) => {
             <p>${data.price.toFixed(2)}</p>
             <p>{data.description}</p>
             <Button
-              onClick={() => router.push(`/cart/${data.id}`)}
+              onClick={() => goToCart(data)}
               variant="contained"
             > 
               Add to Cart

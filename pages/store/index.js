@@ -51,7 +51,7 @@ const Store = ({ data }) => {
                       overflow: "hidden",
                       whiteSpace: "nowrap",
                     }}
-                  >
+                  >  
                     {item.title}
                   </h5>
                   <Image
