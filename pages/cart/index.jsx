@@ -9,19 +9,28 @@ import { useEffect } from "react";
 
 const Cart = () => {
   const [readMore, setReadMore] = useState(false);
- 
+  const [cartItems, setCartItems] = useState([]);
 
-  // let CartItems;
-  // useEffect(() => {
-  //   CartItems = localStorage.getItem("cart")
-  //     ? JSON.parse(localStorage.getItem("cart"))
-  //     : [];
-  // }, []);
+  const filterCartItems = () => {
+    const cartItems = localStorage("cart");
+
+    const newCartItem = cartItems.filter(function (one, two) {
+      return cartItems.indexOf(one) === two;
+    });
+  };
+
+  useEffect(() => {
+    setCartItems(
+      localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : []
+    );
+  }, []);
 
   return (
     <Container sx={{ marginTop: "100px" }}>
       <Grid>
-        {CartItems.map((data) => {
+        {cartItems.map((data) => {
           return (
             <>
               <Grid key={data.id} item spacing={4}>
@@ -32,6 +41,7 @@ const Cart = () => {
                   height="100px"
                   width="100px"
                 />
+                <Typography>${data.price}</Typography>
                 <Typography>
                   {readMore
                     ? data.description

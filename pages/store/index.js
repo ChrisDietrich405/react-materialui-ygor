@@ -63,7 +63,7 @@ const Store = ({ data }) => {
                   Go to Details
                 </Button>
                 <Button
-                  onClick={() => router.push(`/cart/${item.id}`)}
+                  onClick={() => router.push(`/cart`)}
                   variant="contained"
                 >
                   Add to Cart
