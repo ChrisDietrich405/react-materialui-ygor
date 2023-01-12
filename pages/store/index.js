@@ -18,16 +18,13 @@ const Item = styled(Paper)(({ theme }) => ({
 const Store = ({ data }) => {
   const router = useRouter();
 
-  // const directToDetails = () => {
-  //   router.push(`/store/${item.id}`);
-  // };
-
   function goToDetails(item) {
     const CartItems = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
     const newCart = [...CartItems, item];
     localStorage.setItem("cart", JSON.stringify(newCart));
+    router.push(`/store/${item.id}`);
   }
 
   return (
@@ -35,39 +32,45 @@ const Store = ({ data }) => {
       {data.map((item) => {
         return (
           <>
-            <Link href={`/store/${item.id}`} key={item.id}>
-              <Grid
-                item
-                xs={3}
-                display="flex"
-                flexDirection="column"
-                justifyContent="space-between"
-                boxShadow="1px 1px 1px blue"
-              >
-                <a style={{ padding: "20px", marginBottom: "20px" }}>
-                  <h5
-                    style={{
-                      textOverflow: "ellipsis",
-                      overflow: "hidden",
-                      whiteSpace: "nowrap",
-                    }}
-                  >  
-                    {item.title}
-                  </h5>
-                  <Image
-                    src={item.image}
-                    width={111}
-                    height={111}
-                    alt={item.title}
-                  />
-                  <p style={{ marginLeft: "30px" }}>${item.price.toFixed(2)}</p>
-                  <Button onClick={() => goToDetails(item)} variant="contained">
-                    Go to Details
-                  </Button>
-                  <Button onClick={() => router.push(`/cart/${item.id}`)} variant="contained">Add to Cart</Button>
-                </a>
-              </Grid>
-            </Link>
+            {/* the Link is here  */}
+            {/* <Link href={`/store/${item.id}`} key={item.id}> */}
+            <Grid
+              item
+              xs={3}
+              display="flex"
+              flexDirection="column"
+              justifyContent="space-between"
+              boxShadow="1px 1px 1px blue"
+            >
+              <a style={{ padding: "20px", marginBottom: "20px" }}>
+                <h5
+                  style={{
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {item.title}
+                </h5>
+                <Image
+                  src={item.image}
+                  width={111}
+                  height={111}
+                  alt={item.title}
+                />
+                <p style={{ marginLeft: "30px" }}>${item.price.toFixed(2)}</p>
+                <Button onClick={() => goToDetails(item)} variant="contained">
+                  Go to Details
+                </Button>
+                <Button
+                  onClick={() => router.push(`/cart/${item.id}`)}
+                  variant="contained"
+                >
+                  Add to Cart
+                </Button>
+              </a>
+            </Grid>
+            {/* </Link> */}
           </>
         );
       })}

@@ -11,7 +11,7 @@ const StoreItem = ({ data }) => {
       : [];
     const newCart = [...CartItems, item];
     localStorage.setItem("cart", JSON.stringify(newCart));
-    router.push(`/cart/${data.id}`)
+    router.push(`/cart`)
   }
 
   return (
