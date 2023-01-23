@@ -5,18 +5,18 @@ import { useRouter } from "next/router";
 const StoreItem = ({ data }) => {
   const router = useRouter();
 
-  const goToCart = (item) => {
+  const addToCart = (item) => {
     const CartItems = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
     const newCart = [...CartItems, item];
     localStorage.setItem("cart", JSON.stringify(newCart));
-    router.push(`/cart`)
-  }
+    router.push(`/cart`);
+  };
 
   return (
     <>
-      <Typography variant="h1" gutterBottom component="div">
+      <Typography variant="h3" gutterBottom component="div">
         Details{" "}
       </Typography>
       <Grid container spacing={2} margin="0 auto" sx={{ m: 6 }}>
@@ -33,10 +33,7 @@ const StoreItem = ({ data }) => {
             <Image src={data.image} width={111} height={111} alt={data.title} />
             <p>${data.price.toFixed(2)}</p>
             <p>{data.description}</p>
-            <Button
-              onClick={() => goToCart(data)}
-              variant="contained"
-            > 
+            <Button onClick={() => addToCart(data)} variant="contained">
               Add to Cart
             </Button>
           </div>

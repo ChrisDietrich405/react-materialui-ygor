@@ -6,6 +6,8 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Image from "next/image";
 import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+
 import { useRouter } from "next/router";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -27,54 +29,67 @@ const Store = ({ data }) => {
     router.push(`/store/${item.id}`);
   }
 
+  const addToCart = (item) => {
+    const CartItems = localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
+    const newCart = [...CartItems, item];
+    localStorage.setItem("cart", JSON.stringify(newCart));
+    router.push(`/cart`);
+  };
+
+
+
   return (
-    <Grid container spacing={2} margin="0 auto">
-      {data.map((item) => {
-        return (
-          <>
-            {/* the Link is here  */}
-            {/* <Link href={`/store/${item.id}`} key={item.id}> */}
-            <Grid
-              item
-              xs={3}
-              display="flex"
-              flexDirection="column"
-              justifyContent="space-between"
-              boxShadow="1px 1px 1px blue"
-            >
-              <a style={{ padding: "20px", marginBottom: "20px" }}>
-                <h5
-                  style={{
-                    textOverflow: "ellipsis",
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {item.title}
-                </h5>
-                <Image
-                  src={item.image}
-                  width={111}
-                  height={111}
-                  alt={item.title}
-                />
-                <p style={{ marginLeft: "30px" }}>${item.price.toFixed(2)}</p>
-                <Button onClick={() => goToDetails(item)} variant="contained">
-                  Go to Details
-                </Button>
-                <Button
-                  onClick={() => router.push(`/cart`)}
-                  variant="contained"
-                >
-                  Add to Cart
-                </Button>
-              </a>
-            </Grid>
-            {/* </Link> */}
-          </>
-        );
-      })}
-    </Grid>
+    <>
+      <Button onClick={() => router.push("/login")}>Log In</Button>
+      <Grid container spacing={2} margin="0 auto">
+        {data.map((item) => {
+          return (
+            <>
+              <Grid
+                item
+                xs={3}
+                display="flex"
+                flexDirection="column"
+                justifyContent="space-between"
+                boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px"
+              >
+                <a style={{ padding: "20px", marginBottom: "20px" }}>
+                  <h5
+                    style={{
+                      textOverflow: "ellipsis",
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {item.title}
+                  </h5>
+                  <Image
+                    src={item.image}
+                    width={111}
+                    height={111}
+                    alt={item.title}
+                  />
+                  <p style={{ marginLeft: "30px" }}>${item.price.toFixed(2)}</p>
+                  <Button
+                    sx={{ mx: 2 }}
+                    onClick={() => goToDetails(item)}
+                    variant="contained"
+                  >
+                    Details
+                  </Button>
+                  <Button onClick={() => addToCart(item)} variant="contained">
+                    Cart
+                  </Button>
+                </a>
+              </Grid>
+              {/* </Link> */}
+            </>
+          );
+        })}
+      </Grid>
+    </>
   );
 };
 
